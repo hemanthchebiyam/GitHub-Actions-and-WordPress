@@ -50,13 +50,13 @@ jobs:
 
       # Step 5: Preview the infrastructure changes
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -var-file="sensitive_values.tfvars"
 
   
 
       # Step 6: Apply the infrastructure changes
       - name: Terraform Apply
-        run: terraform apply -auto-approve # Auto-approve flag skips manual confirmation
+        run: terraform apply -auto-approve -var-file="sensitive_values.tfvars" # Auto-approve flag skips manual confirmation
 
   terraform_destroy:
     name: "Terraform_destroy"
@@ -84,7 +84,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Plan Destroy
-        run: terraform plan -destroy
+        run: terraform plan -destroy -var-file="sensitive_values.tfvars"
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+        run: terraform destroy -auto-approve -var-file="sensitive_values.tfvars"
